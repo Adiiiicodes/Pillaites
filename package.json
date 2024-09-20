@@ -51,7 +51,7 @@
     "tailwindcss-animate": "^1.0.7",
     "uploadthing": "^6.13.2",
     "zod": "^3.23.8",
-    "googleapis": "^118.0.0"  // Added googleapis as it was missing
+    "googleapis": "^118.0.0"  
   },
   "devDependencies": {
     "@types/node": "^20",
