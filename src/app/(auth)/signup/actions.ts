@@ -16,10 +16,19 @@ export async function signUp(
   try {
     const { username, email, password } = signUpSchema.parse(credentials);
 
-    // Check if the email ends with '@student.mes.ac.in'
-    if (!email.endsWith("@student.mes.ac.in")) {
+    // Check if the email exists in the invite table
+    const invitedEmail = await prisma.invite.findFirst({
+      where: {
+        email: {
+          equals: email,
+          mode: "insensitive",
+        },
+      },
+    });
+
+    if (!invitedEmail) {
       return {
-        error: "Email must be from the domain @student.mes.ac.in",
+        error: "You are not invited! You are not a Pillaite!",
       };
     }
 
@@ -63,6 +72,7 @@ export async function signUp(
     }
 
     await prisma.$transaction(async (tx) => {
+      // Create the user
       await tx.user.create({
         data: {
           id: userId,
@@ -72,6 +82,14 @@ export async function signUp(
           passwordHash,
         },
       });
+
+      // Remove email from invite table after successful creation
+      await tx.invite.delete({
+        where: {
+          email: email,
+        },
+      });
+
       await streamServerClient.upsertUser({
         id: userId,
         username,

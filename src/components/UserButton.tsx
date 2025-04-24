@@ -4,7 +4,7 @@ import { logout } from "@/app/(auth)/actions";
 import { useSession } from "@/app/(main)/SessionProvider";
 import { cn } from "@/lib/utils";
 import { useQueryClient } from "@tanstack/react-query";
-import { Check, LogOutIcon, Monitor, Moon, Sun, UserIcon, Calendar, Vote, Info, Beer } from "lucide-react";
+import { Check, LogOutIcon, Monitor, Moon, Sun, UserIcon, Calendar, Vote, Info, Shield, Search } from "lucide-react"; // Updated to use "Shield" for safety
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import {
@@ -51,27 +51,6 @@ export default function UserButton({ className }: UserButtonProps) {
           <DropdownMenuItem>
             <Calendar className="mr-2 size-4" />
             Calendar
-          </DropdownMenuItem>
-        </Link>
-
-        <Link href="/voting">
-          <DropdownMenuItem>
-            <Vote className="mr-2 size-4" />
-            Voting
-          </DropdownMenuItem>
-        </Link>
-
-        <Link href="/about">
-          <DropdownMenuItem>
-            <Info className="mr-2 size-4" />
-            About
-          </DropdownMenuItem>
-        </Link>
-
-        <Link href="/women">
-          <DropdownMenuItem>
-            <Beer className="mr-2 size-4" />
-            Women
           </DropdownMenuItem>
         </Link>
 
